@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimentos para Controle da Glicemia</title>
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9fc;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cores dos títulos atualizadas para verde escuro */
+        h1, h2, h3 {
+            color: #1a5c1e; /* Verde escuro */
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, #19471a, #103611);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white; /* Mantém branco no cabeçalho */
+        }
+        
+        /* Navegação por abas */
+        .tabs {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab:hover {
+            background-color: #f0f7f0;
+        }
+        
+        .tab.active {
+            background-color: #e8f5e9;
+            border-bottom: 3px solid #1a5c1e; /* Verde escuro */
+            color: #1a5c1e; /* Verde escuro */
+        }
+        
+        /* Conteúdo das abas */
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Cards de alimentos */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .food-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .food-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            background-color: #e8f5e9; /* Cor de fundo para imagens ausentes */
+        }
+        
+        .food-info {
+            padding: 20px;
+        }
+        
+        .food-info h3 {
+            color: #1a5c1e; /* Verde escuro */
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .food-info p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-tag {
+            display: inline-block;
+            background-color: #e8f5e9;
+            color: #1a5c1e; /* Verde escuro */
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Seção de dicas */
+        .tips-section {
+            background-color: #e8f5e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .tips-section h2 {
+            color: #1a5c1e; /* Verde escuro */
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tips-list {
+            list-style-type: none;
+        }
+        
+        .tips-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #c8e6c9;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .tips-list li::before {
+            content: "✓";
+            color: #1a5c1e; /* Verde escuro */
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Rodapé atualizado */
+        footer {
+            background-color: #264b28;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: white; /* Mantém branco no rodapé */
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #e8f5e9;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Estilos para as caixas de diabetes */
+        .boxes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .diabetes-box {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 5px solid #1a5c1e; /* Verde escuro */
+        }
+
+        .diabetes-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .box-header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .box-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #e8f5e9;
+            overflow: hidden;
+            color: #1a5c1e; /* Verde escuro */
+           
+        }
+
+          .box-icon.img-icon {
+            padding: 5px;
+        }
+
+        .box-icon.img-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .box-title {
+            font-size: 1.8rem;
+            color: #1a5c1e; /* Verde escuro */
+            margin: 0;
+        }
+
+        .box-content {
+            padding: 25px;
+        }
+
+        .box-content p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #1a5c1e; /* Verde escuro */
+        }
+
+        .risk-factors {
+            margin-top: 20px;
+        }
+
+        .risk-factors h3 {
+            color: #1a5c1e; /* Verde escuro */
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .risk-factors ul {
+            padding-left: 20px;
+        }
+
+        .risk-factors li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .risk-factors li:before {
+            content: "•";
+            color: #1a5c1e; /* Verde escuro */
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .statistics {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
+            text-align: center;
+            border: 1px dashed #1a5c1e; /* Verde escuro */
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .boxes-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .diabetes-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i>🥗</i>
+                    <h1>Glicemia Controlada</h1>
+                </div>
+                <p>Alimentos que ajudam a controlar o açúcar no sangue</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Navegação por abas - AGORA COM "SOBRE A GLICEMIA" EM PRIMEIRO -->
+        <div class="tabs">
+            <div class="tab active" data-tab="sobre">Sobre a glicemia</div>
+            <div class="tab" data-tab="alimentos">Proteínas</div>
+            <div class="tab" data-tab="dicas">Vitaminas</div>
+            <div class="tab" data-tab="receitas">Fibras</div>
+        </div>
+
+        <!-- Conteúdo da aba Sobre - AGORA EM PRIMEIRO -->
+        <div class="tab-content active" id="sobre">
+            <h2>Sobre o controle da glicemia</h2>
+            <h3 style="margin-top: 25px;">Você sabe o que é diabetes?</h3>
+            <p>Diabetes, segundo a Organização Mundial da Saúde (OMS), é uma doença metabólica causada pela má absorção ou produção insuficiente de insulina, causando níveis elevados de açúcar no sangue. De acordo com a Sociedade Brasileira de Diabetes, existem no Brasil mais de 13 milhões de pessoas vivendo com a doença, que quando não tratada corretamente, causa danos graves aos vasos sanguíneos, coração, rins e nervos. Além de medicações e acompanhamento médico constante, alguns alimentos podem proporcionar uma maior qualidade de vida para aqueles que convivem com a condição.</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Prevenir complicações do diabetes</li>
+                <li>Manter níveis de energia estáveis ao longo do dia</li>
+                <li>Reduzir o risco de doenças cardiovasculares</li>
+                <li>Melhorar a função cognitiva e o humor</li>
+                <li>Promover um peso saudável</li>
+            </ul>
+            
+            <div class="boxes-container">
+                <!-- Caixa Diabetes Tipo 1 -->
+                <div class="diabetes-box">
+                    <div class="box-header">
+                        <div class="box-icon img-icon">
+                        <img src="Images/pancreas.jpeg" alt="Diabetes Tipo 1">
+                        </div>
+                        <h2 class="box-title">Diabetes Tipo 1</h2>
+                    </div>
+                    <div class="box-content">
+                        <p> É uma doença crônica hereditária em que o sistema imunológico destrói as células beta-pancreáticas, responsáveis por produzir e secretar insulina. </p>
+
+                        <div class="highlight">
+                            <p><strong>
+ Os primeiros sintomas costumam aparecer na infância ou adolescência. </strong></p>
+                        </div>
+                        
+                        <p> Por conta da deficiência do hormônio, é necessária a aplicação diária de insulina para controlar os níveis de glicose no sangue.</p>
+                        
+                        <div class="statistics">
+                            <p><strong>Sintomas: <br>
+-Sede excessiva <br>
+-Fadiga<br>
+-Visão turva,<br>
+-Fome frequente <br>
+-Náusea e vômitos.</strong> </p>
+                        </div>
+                        
+                
+                    </div>
+                </div>
+
+                <!-- Caixa Diabetes Tipo 2 -->
+                <div class="diabetes-box">
+                    <div class="box-header">
+                      <div class="box-icon img-icon">
+                        <img src="Images/Medidor.jpeg" alt="Diabetes Tipo 1">
+                        </div>
+                        <h2 class="box-title">Diabetes Tipo 2</h2>
+                        </div>
+                    <div class="box-content">
+                        <p>
+É uma doença metabólica em que o organismo desenvolve resistência a atuação da insulina.</p>
+                        
+                        <div class="risk-factors">
+                            <h3>Fatores de Risco:</h3>
+                            <ul>
+                                <li>Sobrepeso</li>
+                                <li>Hipertensão</li>
+                                <li>Estresse</li>
+                                <li>Sedentarismo</li>
+                                <li>Hábitos alimentares inadequados</li>
+                            </ul>
+                        </div>
+                        
+                        <p>Por isso, é essencial manter acompanhamento médico para tratar também dessas outras doenças, que podem aparecer junto com o diabetes.</p>
+                        
+                        <div class="highlight">
+                            <p>Atinge principalmente adultos <strong>acima dos 40 anos.</strong></p>
+                        </div>
+                        
+                        <div class="statistics">
+                            <p><strong>Sintomas: <br>
+-Aparição de manchas escuras na pele (acantose nigricans) <br>
+-Formigamento nas mãos e nos pés <br>
+-Feridas que demoram para cicatrizar<br>
+-Infecções frequentes <br>
+-Vontade de urinar excessiva</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo da aba Alimentos -->
+        <div class="tab-content" id="alimentos">
+            <h2>Alimentos ricos em proteínas que auxiliam no controle da glicemia</h2>
+            <p></p>
+            
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Atumesalmaopeixesomega3 (1).jpg');"></div>
+                    <div class="food-info">
+                        <h3>Peixes ricos em ômega 3</h3>
+                        <p>De opções com preços mais elevados como o salmão até opções mais baratas como a sardinha, peixes ricos em ácido graxo poli-insaturado ômega 3 atuam na redução de marcadores inflamatórios, além de redução da pressão arterial e diminuição das concentrações de triglicerídeos sanguíneos.</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/ovos.jpg');"></div>
+                    <div class="food-info">
+                        <h3>Ovos</h3>
+                        <p>Como uma ótima fonte de proteina e regulador do nível de glicemia do organismo, os ovos causam melhoras significativas na resistência à insulina e aumentam o HDL colesterol (conhecido como "colesterol do bem" quando em níveis equilibrados, pois ajuda na eliminação do excesso de colesterol das artérias). Mas opte sempre por opções livres de excesso de gordura e fritura!</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Feijaopreto.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Feijão</h3>
+                        <p>Muito presente nos pratos cotidianos do povo brasileiro, o feijão desacelera a absorção de glicose no organismo e as proteínas e fibras presentes no grão promovem a saciedade e atuam na melhora da saúde intestinal. Mais especificamente, as fibras solúveis existentes no feijão realizam um controle glicêmico controlando picos dos níveis de açúcar no sangue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo da aba Dicas -->
+        <div class="tab-content" id="dicas">
+            <h2>Alimentos ricos em vitaminas que auxiliam no controle da glicemia</h2>
+            <p></p>
+            
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Brocolis1.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Brócolis</h3>
+                        <p>O brócolis é um excelente aliado na regulação da glicemia por ser rico em sulforafano, um composto com propriedades antioxidantes e anti-inflamatórias. Além de ser importante na dieta de pessoas já diagnosticadas com diabetes, estudos realizados na Universidade de Gotemburgo (Suécia) indicam que o vegetal ajuda na prevenção do desenvolvimento de diabetes tipo 2.</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Folhasverdes.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Folhas verdes escuras</h3>
+                        <p>Com baixo índice glicêmico, folhas verdes como espinafre, couve e acelga possuem vitaminas, fibras, minerais (como o magnésio) e antioxidantes que não só melhoram o funcionamento do organismo como também previnem o desenvolvimento da doença.</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Abacate.jpg');"></div>
+                    <div class="food-info">
+                        <h3>Abacate</h3>
+                        <p>Além de ser versátil em receitas, o abacate ajuda a manter os níveis de glicose no sangue regulados, tem uma das menores quantidades de açúcar entre as frutas, é uma boa fonte de potássio, fibras e possui uma substância chamada avocatina-B que ajuda a melhorar a resistência à insulina.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Conteúdo da aba Receitas -->
+        <div class="tab-content" id="receitas">
+            <h2>Alimentos ricos em fibras que auxiliam no controle de glicemia</h2>
+            
+            <div class="food-grid">
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Chia1.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Semente de chia</h3>
+                        <p>Rica em minerais, proteínas, fibras e vitaminas, a chia é um alimento muito completo que melhora a saúde intestinal e controla os níveis de glicemia no sangue desacelerando a absorção de carboidratos. Para aqueles que já possuem diabetes, esta semente controla a quantidade de açúcar no sangue e previne o surgimento da resistência à insulina para os que possuem predisposição à doença, além de trazer benefícios aos que buscam um estilo de vida mais saudável.</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Nozes1.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Nozes</h3>
+                        <p>Castanha de caju, amêndoas e nozes são alimentos que podem ser adicionados nas refeições para uma melhora da qualidade de vida. A amêndoa reduz o risco de doenças cardíacas e aumenta a quantidade de HDL colesterol (nosso colesterol do bem, lembra?) Quando consumidas com equilíbrio, melhoram a sensibilidade à insulina e diminuem a pressão arterial.</p>
+                    </div>
+                </div>
+                
+                <div class="food-card">
+                    <div class="food-image" style="background-image: url('Images/Graosintegrais2.jpeg');"></div>
+                    <div class="food-info">
+                        <h3>Grãos integrais</h3>
+                        <p>Otimas fontes de fibras solúveis e insolúveis, os grãos integrais como quinoa, arroz e aveia promovem uma absorção de carboidratos mais lenta, reduzindo o indice glicêmico das refeições. Diminuem os processos inflamatórios do organismo e otimizando a sensibilidade à insulina, esses alimentos integrais são ótimas opções para a dieta de diabéticos tipo 1 e tipo 2.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé atualizado -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Universidade de São Paulo</h3>
+                    <p>Faculdade de Ciências Farmacêuticas</p>
+                    <p>Departamento de Alimentos e Nutrição</p>
+                </div>
+                
+              <div class="footer-section">
+                    <h3>Créditos</h3>
+                    <p>Site: Ana Clara Rodrigues - 16840247 </p> <p>Pesquisa: Érika da Costa - 3751226 </p> 
+                    <p>Pesquisa e imagens: Mayná Andrade - 16837052 </p> 
+                   <p> Pesquisa: Natália Aparecida - 16832540 </p> 
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Informações</h3>
+                    <p>Disciplina: Composição de Alimentos</p>
+                    <p>Curso: Nutrição - Período Noturno</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Universidade de São Paulo - Trabalho acadêmico para fins educacionais.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navegação por abas
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove a classe active de todas as abas e conteúdos
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Adiciona a classe active à aba clicada
+                    tab.classList.add('active');
+                    
+                    // Mostra o conteúdo correspondente
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
